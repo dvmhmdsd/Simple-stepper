@@ -6,9 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { customTheme } from "./theme";
 
-import "@fontsource/dm-sans";
-import "@fontsource/dm-sans/700.css";
-import "@fontsource/dm-sans/700-italic.css";
+import "@fontsource/almarai";
+import "@fontsource/almarai/400.css";
 
 const theme = createTheme(customTheme);
 
