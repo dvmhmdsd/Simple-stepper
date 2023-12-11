@@ -12,6 +12,7 @@ import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
 import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
 import { Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import CloseIcon from "@mui/icons-material/Close";
 
 const StepIconRoot = styled("div")(({ ownerState }) => ({
   backgroundColor: "#EBF0F1",
@@ -55,15 +56,17 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-const steps = [
-  { label: "Request Created", info: "09 Dec,10 AM" },
-  { label: "Assigning" },
-  { label: "Start" },
-  { label: "Closed" },
-];
-
-export default function CustomizedSteppers({ activeStep = 1 }) {
+export default function CustomizedSteppers({
+  activeStep = 3,
+  endStatus = "completed",
+}) {
   const [isLastStep, setIsLastStep] = useState(false);
+  const steps = [
+    { label: "Request Created", info: "09 Dec,10 AM" },
+    { label: "Assigning" },
+    { label: "Start" },
+    { label: endStatus === "canceled" ? "Canceled" : "Closed" },
+  ];
 
   useEffect(() => {
     if (activeStep === 3) setIsLastStep(true);
@@ -76,7 +79,22 @@ export default function CustomizedSteppers({ activeStep = 1 }) {
       1: <InsertDriveFileOutlinedIcon />,
       2: <ManageAccountsOutlinedIcon />,
       3: <TimerOutlinedIcon />,
-      4: <CheckOutlinedIcon sx={{ color: "#fff" }} />,
+      4:
+        endStatus === "canceled" ? (
+          <CloseIcon sx={{ color: "#fff" }} />
+        ) : (
+          <CheckOutlinedIcon sx={{ color: "#fff" }} />
+        ),
+    };
+
+    const getBgColorForLastStep = () => {
+      if (active && isLastStep) {
+        if (endStatus === "canceled") {
+          return theme.palette.error.main;
+        } else {
+          return theme.palette.success.main;
+        }
+      }
     };
 
     return (
@@ -84,7 +102,7 @@ export default function CustomizedSteppers({ activeStep = 1 }) {
         ownerState={{ completed, active }}
         className={className}
         sx={{
-          backgroundColor: active && isLastStep && theme.palette.success.main,
+          backgroundColor: getBgColorForLastStep(),
         }}
       >
         {icons[String(icon)]}

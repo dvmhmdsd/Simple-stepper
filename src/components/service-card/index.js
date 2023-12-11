@@ -32,7 +32,11 @@ export default function ServiceCard() {
             <Counter />
           </Box>
         </Box>
-        <ServiceSteps />
+        <ServiceSteps activeStep={0} />
+        <ServiceSteps activeStep={1} />
+        <ServiceSteps activeStep={2} />
+        <ServiceSteps activeStep={3} />
+        <ServiceSteps activeStep={3} endStatus="canceled" />
         <Box
           sx={{
             marginTop: "2rem",
