@@ -34,17 +34,21 @@ export default function Counter({
         alignItems: "center",
       }}
     >
-      <AccessTimeIcon color="info" />
-      <Typography
-        variant="h3"
-        sx={{
-          margin: "0 0.6rem",
-        }}
-      >
-        {getDoubleCharStringFromNum(hours)}:
-        {getDoubleCharStringFromNum(minutes)}:
-        {getDoubleCharStringFromNum(seconds)}
-      </Typography>
+      {!!seconds && (
+        <>
+          <AccessTimeIcon color="info" />
+          <Typography
+            variant="h3"
+            sx={{
+              margin: "0 0.6rem",
+            }}
+          >
+            {getDoubleCharStringFromNum(hours)}:
+            {getDoubleCharStringFromNum(minutes)}:
+            {getDoubleCharStringFromNum(seconds)}
+          </Typography>
+        </>
+      )}
     </Box>
   );
 }

@@ -15,6 +15,18 @@ export default function ServiceCard({ service, steps, status }) {
   });
 
   const theme = useTheme();
+  const getBgColorAccordingToStatus = () => {
+    switch (status.shortName) {
+      case "started":
+        return theme.palette.warning.bg;
+      case "closed":
+        return "#EDFAF4";
+      case "cancelled":
+        return "#FFE5E5";
+      default:
+        return theme.palette.gray.bg;
+    }
+  };
   return (
     <Card
       sx={{
@@ -47,7 +59,7 @@ export default function ServiceCard({ service, steps, status }) {
         <Box
           sx={{
             marginTop: "2rem",
-            backgroundColor: theme.palette.gray.bg,
+            backgroundColor: getBgColorAccordingToStatus(),
             padding: "1.6rem",
             borderRadius: "16px",
           }}

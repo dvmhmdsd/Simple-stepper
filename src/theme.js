@@ -45,6 +45,7 @@ export const customTheme = {
     },
     warning: {
       main: "#FFC225",
+      bg: "#FFC22514",
     },
   },
   spacing: (factor) => `${0.25 * factor}rem`,
