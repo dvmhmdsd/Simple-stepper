@@ -56,17 +56,8 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedSteppers({
-  activeStep = 3,
-  endStatus = "completed",
-}) {
+export default function CustomizedSteppers({ activeStep, status, steps }) {
   const [isLastStep, setIsLastStep] = useState(false);
-  const steps = [
-    { label: "Request Created", info: "09 Dec,10 AM" },
-    { label: "Assigning" },
-    { label: "Start" },
-    { label: endStatus === "canceled" ? "Canceled" : "Closed" },
-  ];
 
   useEffect(() => {
     if (activeStep === 3) setIsLastStep(true);
@@ -80,7 +71,7 @@ export default function CustomizedSteppers({
       2: <ManageAccountsOutlinedIcon />,
       3: <TimerOutlinedIcon />,
       4:
-        endStatus === "canceled" ? (
+        status === "cancelled" ? (
           <CloseIcon sx={{ color: "#fff" }} />
         ) : (
           <CheckOutlinedIcon sx={{ color: "#fff" }} />
@@ -89,7 +80,7 @@ export default function CustomizedSteppers({
 
     const getBgColorForLastStep = () => {
       if (active && isLastStep) {
-        if (endStatus === "canceled") {
+        if (status === "cancelled") {
           return theme.palette.error.main;
         } else {
           return theme.palette.success.main;

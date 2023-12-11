@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Box, Typography } from "@mui/material";
@@ -6,7 +6,14 @@ import Counter from "./counter";
 import ServiceSteps from "./service-steps";
 import { useTheme } from "@emotion/react";
 
-export default function ServiceCard() {
+export default function ServiceCard({ service, steps, status }) {
+  const [activeStep, setActiveStep] = useState(0);
+  useEffect(() => {
+    steps.forEach((step, index) => {
+      if (step.name === status.shortName) setActiveStep(index);
+    });
+  });
+
   const theme = useTheme();
   return (
     <Card
@@ -25,18 +32,18 @@ export default function ServiceCard() {
           }}
         >
           <Box>
-            <Typography variant="h2">Plumbing</Typography>
-            <Typography variant="subtitle1">Maintenance</Typography>
+            <Typography variant="h2">{service.title}</Typography>
+            <Typography variant="subtitle1">{service.name}</Typography>
           </Box>
           <Box>
             <Counter />
           </Box>
         </Box>
-        <ServiceSteps activeStep={0} />
-        <ServiceSteps activeStep={1} />
-        <ServiceSteps activeStep={2} />
-        <ServiceSteps activeStep={3} />
-        <ServiceSteps activeStep={3} endStatus="canceled" />
+        <ServiceSteps
+          steps={steps}
+          activeStep={activeStep}
+          status={status.shortName}
+        />
         <Box
           sx={{
             marginTop: "2rem",
@@ -45,10 +52,8 @@ export default function ServiceCard() {
             borderRadius: "16px",
           }}
         >
-          <Typography variant="h3">Professional Assigned</Typography>
-          <Typography variant="body2">
-            Professional has been assigned, need to start from professional side
-          </Typography>
+          <Typography variant="h3">{status.title}</Typography>
+          <Typography variant="body2">{status.body}</Typography>
         </Box>
       </CardContent>
     </Card>
