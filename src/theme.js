@@ -16,6 +16,10 @@ export const customTheme = {
       fontSize: 16,
       fontWeight: 700,
     },
+    h5: {
+      fontSize: 14,
+      fontWeight: 700,
+    },
     body1: {
       fontSize: 16,
     },

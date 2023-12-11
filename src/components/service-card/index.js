@@ -2,8 +2,8 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Box, Typography } from "@mui/material";
-import Counter from "../counter";
-import ServiceSteps from "../service-steps";
+import Counter from "./counter";
+import ServiceSteps from "./service-steps";
 import { useTheme } from "@emotion/react";
 
 export default function ServiceCard() {
